@@ -11,9 +11,9 @@ var ymdDateSpirit = new Date(oldMiliSpirit).toISOString(); // Year Month Day for
 var searchSpirit = ymdDateSpirit.substr(0, 10); // Year Month and Day only. 2014-08-05
 
 $(document).ready(function() {
-  switchRover("curiosity", searchDate);
+  switchRover("curiosity", searchDate); // pulls in images of Curiousity rover for Home page
   document.getElementById('dateRange').innerHTML = "Search Range: 2012-08-06 to " + searchDate;
-  document.getElementById('searchBtn').onclick = function(e) {
+  document.getElementById('searchBtn').onclick = function(e) { // sets up home page search box to search Curiosity rover
     e.preventDefault();
     searchDateByRover("curiosity");
   }
@@ -27,7 +27,7 @@ $(document).ready(function() {
   //         //         img.src = data.photos[i].img_src;
   //         //       }
 
-  function switchRover(roverName, earthDate) { // clears array & div of old images and inserts new images
+  function switchRover(roverName, earthDate) { // function that clears array & div of old images and html and inserts new html and images into page for the rover that is selected from top of the html page
     siteImages = [];
     document.getElementById("gallery").innerHTML = "";
     $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/" + roverName + "/photos?earth_date=" + earthDate + "&api_key=hO7EyKsud04wDyzzRAr2EKchRLhvycBlbh9lngBp", function(data) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
     }); // end getJSON and inner function
   }; // end switchRover function
 
-  function searchDateByRover(roverName) { // clears array & div of old images and inserts new images
+  function searchDateByRover(roverName) { // function that sets up search bar for rover that is selected from top of the html page. Also clears array & div of old images and html and inserts new html and images into page for the selected rover
     siteImages = [];
     document.getElementById("gallery").innerHTML = "";
     var searchVal = document.getElementById("searchBar").value;
@@ -62,7 +62,7 @@ $(document).ready(function() {
     }); // end getJSON and inner function
   }; // end searchDateByRover function 
 
-  document.getElementById("curiosity").onclick = function(e) {
+  document.getElementById("curiosity").onclick = function(e) { // Loads latest images and enables image search by date for Curiosity rover
       e.preventDefault();
       document.getElementById('roverHeading').innerHTML = "Curiosity:";
       document.getElementById('dateRange').innerHTML = "Search Range: 2012-08-08 to " + searchDate;
@@ -73,7 +73,7 @@ $(document).ready(function() {
       }
     } // end of 'onclick' document.getElement function
 
-  document.getElementById("opportunity").onclick = function(e) {
+  document.getElementById("opportunity").onclick = function(e) { // Loads latest images and enables image search by date for Opportunity rover
       e.preventDefault();
       document.getElementById('roverHeading').innerHTML = "Opportunity:";
       document.getElementById('dateRange').innerHTML = "Search Range: 2004-01-26 to " + searchDate;
@@ -84,7 +84,7 @@ $(document).ready(function() {
       }
     } // end of 'onclick' document.getElement function
 
-  document.getElementById("spirit").onclick = function(e) {
+  document.getElementById("spirit").onclick = function(e) { // Loads latest images and enables image search by date for Spirit rover
       e.preventDefault();
       document.getElementById('roverHeading').innerHTML = "Spirit:";
       document.getElementById('dateRange').innerHTML = "Search Range: 2004-01-04 to 2010-02-26";
