@@ -94,4 +94,8 @@ $(document).ready(function() {
         searchDateByRover("spirit");
       }
     } // end of 'onclick' document.getElement function
+  
+  document.getElementById("backToTopBtn").onclick = function() { // creates 'back to top button'
+      $('html,body').animate({scrollTop:0}, 'slow');return false;  
+  }
 }); // end document.ready
