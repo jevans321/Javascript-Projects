@@ -45,24 +45,37 @@
 
 
 <div class="container text-center">
-  <h3><span id="roverHeading">Curiosity:</span> Mars rover photos</h3>
-</div>
-<!-- end container -->
-<div class="container text-center">
-  <form class="navbar-form" role="search">
-    <div class="form-group">
-      <input type="text" id="searchBar" class="form-control" placeholder="Search YYYY-MM-DD" maxlength="10">
+  <div class="row">
+    <div class="col-lg-3">
     </div>
-    <button id="searchBtn" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-  </form>
-  <p>Search photos by date</p>
-  <p id="dateRange">Example: 2016-05-15</p>
+    <div class="col-lg-6">
+      <div>
+        <p class="lead text-left">Here you can look up images from each of the three rovers that landed on Mars: <i>Curiosity, Opportunity,</i> and <i>Spirit</i>. Their latest images are automatically displayed by clicking any of the links above or you can search by date below.</p>
+      </div>
+      
+      <p>To Search: Enter a date from the following Range below:<span id="dateRange">Example: 2016-05-15</span></p>
+
+      <form class="navbar-form" role="search">
+        <div class="form-group">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search YYYY-MM-DD" maxlength="10">
+        </div>
+        <button id="searchBtn" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+      <p id="message"></p>
+      <h3><span id="roverHeading">Curiosity:</span> Mars rover photos</h3>
+      <br>
+    </div>
+    <!-- end middle col -->
+    <div class="col-lg-3">
+    </div>
+  </div>
+  <!-- end row -->
 </div>
 <!-- end container -->
 <div class="container">
   <div class="row">
     <div id="gallery">
-      <h2><center>Latest Photos</center></h2>
+      <!--       <h2><center>Latest Photos</center></h2> -->
     </div>
   </div>
   <!-- end row -->
@@ -74,9 +87,9 @@
       <button href="#top" id="backToTopBtn" class="btn btn-xs pull-right"><span class="glyphicon glyphicon-chevron-up"></span>
    </button>
     </div>
-    </div>
-   </br>
-  </br>
+  </div>
+  <br>
+  <br>
 </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
