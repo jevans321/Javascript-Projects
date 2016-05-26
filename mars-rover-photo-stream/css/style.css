@@ -6,3 +6,7 @@
     display:inline-block;
     float:none;
 }
+
+span.glyphicon-chevron-up {
+    font-size: 5em;
+}
