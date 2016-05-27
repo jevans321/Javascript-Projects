@@ -12,6 +12,7 @@ $(document).ready(function() {
 
   function switchRover(roverName, earthDate) { // function that clears array & div of old images and html and inserts new html and images into page for the rover that is selected from top of the html page
     siteImages = [];
+    document.getElementById("errorMessage").innerHTML = "";
     document.getElementById("gallery").innerHTML = "";
     $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/" + roverName + "/photos?earth_date=" + earthDate + "&api_key=hO7EyKsud04wDyzzRAr2EKchRLhvycBlbh9lngBp", function(data) {
 
