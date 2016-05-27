@@ -39,7 +39,7 @@ $(document).ready(function() {
       } // end for loop
 
       for (var y = 0; y < siteImages.length; y++) {
-        document.getElementById('gallery').innerHTML += "<img src='" + siteImages[y] + "' width='1250' class='img-responsive'>" + "Date:" + " " + data.photos[y].earth_date + " " + data.photos[y].camera.full_name + "<br><br>";
+        document.getElementById('gallery').innerHTML += "<img src='" + siteImages[y] + "' width='900' class='img-responsive center-block'>" + "<h5>" + " " + data.photos[y].camera.full_name + "</h5><h4>Date: " + data.photos[y].earth_date + "</h4><br><br>";
       }
     }); // end getJSON and inner function
   }; // end switchRover function
@@ -59,7 +59,7 @@ $(document).ready(function() {
       } // end for loop
 
       for (var y = 0; y < siteImages.length; y++) {
-        document.getElementById('gallery').innerHTML += "<img src='" + siteImages[y] + "' width='1250' class='img-responsive'>" + data.photos[y].earth_date + " " + data.photos[y].camera.full_name + "<br><br>";
+        document.getElementById('gallery').innerHTML += "<img src='" + siteImages[y] + "' width='900' class='img-responsive center-block'>" + "<h5>" + " " + data.photos[y].camera.full_name + "</h5><h4>Date: " + data.photos[y].earth_date + "</h4><br><br>";
       }
     }) // end getJSON and inner function
     .fail(function() { 
@@ -95,8 +95,8 @@ $(document).ready(function() {
   document.getElementById("spirit").onclick = function(e) { // Loads latest images and enables image search by date for Spirit rover
       e.preventDefault();
       document.getElementById('roverHeading').innerHTML = "Spirit";
-      document.getElementById('dateRange').innerHTML = "<br>2004-01-04 to 2010-02-26";
-      switchRover("spirit", searchSpirit);
+      document.getElementById('dateRange').innerHTML = "<br>2004-01-05 to 2010-02-26";
+      switchRover("spirit", "2010-02-26"); // Loads the last date images were available from this rover
       document.getElementById('searchBtn').onclick = function(e) {
         e.preventDefault();
         searchDateByRover("spirit");
