@@ -1,12 +1,12 @@
-
 .navbar-collapse {
-  text-align:center;
+  text-align: center;
 }
+
 .navbar-nav {
-    display:inline-block;
-    float:none;
+  display: inline-block;
+  float: none;
 }
 
 span.glyphicon-chevron-up {
-    font-size: 5em;
+  font-size: 5em;
 }
