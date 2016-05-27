@@ -1,21 +1,3 @@
-window.onerror = function(msg, url, line, col, error) {
-   // Note that col & error are new to the HTML 5 spec and may not be 
-   // supported in every browser.  It worked for me in Chrome.
-   var extra = !col ? '' : '\ncolumn: ' + col;
-   extra += !error ? '' : '\nerror: ' + error;
-
-   // You can view the information in an alert to see things working like this:
-   alert("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
-
-   // TODO: Report this error via ajax so you can keep track
-   //       of what pages have JS issues
-
-   var suppressErrorAlert = true;
-   // If you return true, then error alerts (like in older versions of 
-   // Internet Explorer) will be suppressed.
-   return suppressErrorAlert;
-};
-
 var previousDayMs = new Date().getTime() - 86400000; // previous day in milliseconds 86400000 = 1 Day
 var ymdDateFormat = new Date(previousDayMs).toISOString(); // Year Month Day format 2014-08-05T19:42:51.429Z
 var searchDate = ymdDateFormat.substr(0, 10); // Year Month and Day only. 2014-08-05
@@ -24,7 +6,7 @@ var previous2DayMs = new Date().getTime() - 176400000; // previous day in millis
 var ymdDate2Format = new Date(previous2DayMs).toISOString(); // Year Month Day format 2014-08-05T19:42:51.429Z
 var search2Date = ymdDate2Format.substr(0, 10); // Year Month and Day only. 2014-08-05
 
-var oldMiliSpirit = new Date().getTime() - 196905600000; // previous day in milliseconds 86400000 = 1 Day
+var oldMiliSpirit = new Date().getTime() - 216905600000; // previous day in milliseconds 86400000 = 1 Day
 var ymdDateSpirit = new Date(oldMiliSpirit).toISOString(); // Year Month Day format 2014-08-05T19:42:51.429Z
 var searchSpirit = ymdDateSpirit.substr(0, 10); // Year Month and Day only. 2014-08-05
 
@@ -67,17 +49,10 @@ $(document).ready(function() {
     document.getElementById("gallery").innerHTML = "";
     var searchVal = document.getElementById("searchBar").value;
 
-    try {
-      if (searchVal == "") throw "is empty";
-      // if(searchVal == abcd) throw "is empty";
-    } catch (err) {
-      message.innerHTML = "Input " + err;
-    }
-
-    $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/" + roverName + "/photos?earth_date=" + searchVal + "&api_key=hO7EyKsud04wDyzzRAr2EKchRLhvycBlbh9lngBp", function(data) {
+    $.getJSON("https://api.nasa.gov/mars-photos/api/v1/rovers/" + roverName + "/photos?earth_date=" + searchVal + "&api_key=hO7EyKsud04wDyzzRAr2EKchRLhvycBlbh9lngBp", function(data) { 
 
       for (var i = 0; i < data.photos.length; i++) {
-       
+
         if (siteImages.indexOf(data.photos[i].img_src) === -1) { // check if image is in array
           siteImages.unshift(data.photos[i].img_src); // add image to front of array if not in array already
         } // end if loop
@@ -86,12 +61,18 @@ $(document).ready(function() {
       for (var y = 0; y < siteImages.length; y++) {
         document.getElementById('gallery').innerHTML += "<img src='" + siteImages[y] + "' width='1250' class='img-responsive'>" + data.photos[y].earth_date + " " + data.photos[y].camera.full_name + "<br><br>";
       }
-    }); // end getJSON and inner function
+    }) // end getJSON and inner function
+    .fail(function() { 
+      roverHeading.innerHTML = "Images are not available for the date entered<br><br>Or<br><br>Date format is incorrect<br>Use this format:<br>YYYY-MM-DD<br><h4>Y = Year,  M = Month,  D = Day</h4>";
+    })
+ 
   }; // end searchDateByRover function 
+  
 
+  
   document.getElementById("curiosity").onclick = function(e) { // Loads latest images and enables image search by date for Curiosity rover
       e.preventDefault();
-      document.getElementById('roverHeading').innerHTML = "Curiosity:";
+      document.getElementById('roverHeading').innerHTML = "Curiosity";
       document.getElementById('dateRange').innerHTML = "<br>2012-08-08 to " + searchDate;
       switchRover("curiosity", searchDate);
       document.getElementById('searchBtn').onclick = function(e) {
@@ -102,7 +83,7 @@ $(document).ready(function() {
 
   document.getElementById("opportunity").onclick = function(e) { // Loads latest images and enables image search by date for Opportunity rover
       e.preventDefault();
-      document.getElementById('roverHeading').innerHTML = "Opportunity:";
+      document.getElementById('roverHeading').innerHTML = "Opportunity";
       document.getElementById('dateRange').innerHTML = "<br>2004-01-26 to " + searchDate;
       switchRover("opportunity", searchDate);
       document.getElementById('searchBtn').onclick = function(e) {
@@ -113,7 +94,7 @@ $(document).ready(function() {
 
   document.getElementById("spirit").onclick = function(e) { // Loads latest images and enables image search by date for Spirit rover
       e.preventDefault();
-      document.getElementById('roverHeading').innerHTML = "Spirit:";
+      document.getElementById('roverHeading').innerHTML = "Spirit";
       document.getElementById('dateRange').innerHTML = "<br>2004-01-04 to 2010-02-26";
       switchRover("spirit", searchSpirit);
       document.getElementById('searchBtn').onclick = function(e) {
