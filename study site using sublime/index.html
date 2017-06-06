@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatable" content="IE-edge">
+  <meta name="viewport" content="width = device-width, inital-scale = 1">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+
+<body class="header-image">
+  <!-- class inserts background image into page -->
+
+  <div class="container text-center">
+    <!-- bootrap container that also centers all elements on page -->
+    
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8">
+        <!-- This column holds site description text and search bar -->
+        <div class="title">
+          <h2>STUDY SPOT</h2><span class="instructText">Looking for a place to study?<br>Enter any city below and find the best places to study closest to you.</span>
+        </div>
+
+        <form id="custom-search-input"> <!-- search bar -->
+          <div class="input-group col-md-12">
+            <input id="theBar" type="text" class="form-control input-md" placeholder="Enter City">
+            <span class="input-group-btn">
+                        <button id="theBtn" class="btn btn-info btn-lg" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+          </div>
+
+        </form>
+        <!-- end of search bar -->
+
+        <div id="results" class="text-center"> <!-- this div holds all the search result and error content -->
+        </div>
+      </div>
+      <!-- end middle col -->
+      <div class="col-lg-2">
+      </div>
+
+    </div>
+    <!-- end row -->
+
+
+  </div>
+  <!-- end container -->
+
+  <div class="container-fluid footer navbar-fixed-bottom">
+    <!-- begin footer -->
+    <div class="row text-center">
+
+      <h5>All background images are licensed under Creative Commons Zero. Website built by James E.</h5>
+
+    </div>
+  </div>
+  <!-- end footer -->
+
+</body>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</html>
