@@ -27,9 +27,9 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
     .then(data => data.json()) // parses the object data returned from the FourSquare API url, so that if a '400 Bad Request' error is returned, the object data is accessible.
       .then(data => {
         if (data.meta.code === 400) { // if there is a '400 Bad Request' code returned then return the error handling text.
-          return document.getElementById('results').innerHTML += "City entered was not found. Please check spelling and enter again.";
+          return document.getElementById('results').innerHTML += "<h3>City entered was not found. Please check spelling and enter again.</h3>";
         } else if (!isNaN(searchCity)) {
-          return document.getElementById('results').innerHTML += "You have entered a number. Please enter a city name.";
+          return document.getElementById('results').innerHTML += "<h3>You have entered a number. Please enter a city name.</h3>";
           // End of error handling code ---------------------
         } else { // 'else', if there are no errors, execute the code below.
 
