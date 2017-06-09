@@ -24,8 +24,8 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
     window.fetch(objectUrl) // fetches the url API contained in the objectUrl variable
 
     // Error handling --------------------------------------
-    .then(data => data.json()) // parses the object data returned from the FourSquare API url, so that if a '400 Bad Request' error is returned, the object data is accessible.
-      .then(data => {
+    .then(data => data.json()) // parses the object data returned from the FourSquare API url, so that if a '400 Bad Request' error is returned, the object data is accessible. Also using a couple 'ECMAscript 6' arrow functions and a ".then()" method here which will return a Promise. A .then() method chain will follow using the Promise value returned.
+      .then(data => { 
         if (data.meta.code === 400) { // if there is a '400 Bad Request' code returned then return the error handling text.
           return document.getElementById('results').innerHTML += "<h4>City entered was not found. Please check spelling and enter again.</h4>";
         } else if (!isNaN(searchCity)) {
