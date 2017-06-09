@@ -7,7 +7,7 @@ $('.header-image').css({ // this works with the 'images' array above, which allo
 
 function getInfo() { // this 'getInfo' function is what grabs all the content from "Four Square" API, styles it, and then displays it.
 
-    function resultsDivStyle(){
+    function resultsDivStyle(){ // function created to clean up some redundant code. It's called on line 60.
       document.getElementById('results').style.backgroundColor = "#fff"; // styles background color in 'results' div to white before each search.
       document.getElementById('results').style.padding = "20px 0 20px 0"; // styles padding in 'results' div before each search.
     }
@@ -27,9 +27,9 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
     .then(data => data.json()) // parses the object data returned from the FourSquare API url, so that if a '400 Bad Request' error is returned, the object data is accessible.
       .then(data => {
         if (data.meta.code === 400) { // if there is a '400 Bad Request' code returned then return the error handling text.
-          return document.getElementById('results').innerHTML += "<h3>City entered was not found. Please check spelling and enter again.</h3>";
+          return document.getElementById('results').innerHTML += "<h4>City entered was not found. Please check spelling and enter again.</h4>";
         } else if (!isNaN(searchCity)) {
-          return document.getElementById('results').innerHTML += "<h3>You have entered a number. Please enter a city name.</h3>";
+          return document.getElementById('results').innerHTML += "<h4>You have entered a number. Please enter a city name.</h4>";
           // End of error handling code ---------------------
         } else { // 'else', if there are no errors, execute the code below.
 
@@ -45,7 +45,7 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
           
           var j = 1; // variable for the displayed number count to the left of venue name output
 
-          function resultData(){ // contains object data requests for venue name, category, phone number, and address info. Also inserts address into google maps link for a map location.
+          function resultData(){ // contains object data requests for venue name, category, phone number, and address info. Also inserts address into google maps link for a map location. It's located here because it uses the variable "j" defined directly above on line 46. This function is used at the end of line 58 and 61.
             return "<strong>" + j++ +". </strong>" + data.response.groups[0].items[i].venue.name + " - " + data.response.groups[0].items[i].venue.categories[0].name + "<br>" + "<strong>Phone. </strong>" + data.response.groups[0].items[i].venue.contact.formattedPhone + "<br>" + "<strong>Address. </strong>" + data.response.groups[0].items[i].venue.location.formattedAddress + "<br>" + "<a href='http://www.google.com/maps/place/" + data.response.groups[0].items[i].venue.location.address + "+" + data.response.groups[0].items[i].venue.location.postalCode + "' target='_blank'>Google Map</a>" + "<br><br><br>";
           }
 
