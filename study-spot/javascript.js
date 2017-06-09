@@ -7,9 +7,15 @@ $('.header-image').css({ // this works with the 'images' array above, which allo
 
 function getInfo() { // this 'getInfo' function is what grabs all the content from "Four Square" API, styles it, and then displays it.
 
+    function resultsDivStyle(){
+      document.getElementById('results').style.backgroundColor = "#fff"; // styles background color in 'results' div to white before each search.
+      document.getElementById('results').style.padding = "20px 0 20px 0"; // styles padding in 'results' div before each search.
+    }
+
+
     document.getElementById('results').innerHTML = ""; // empties the 'results' id div of all content before each search.
-    document.getElementById('results').style.backgroundColor = "#fff"; // styles background color in 'results' div to white before each search.
-    document.getElementById('results').style.padding = "20px 0 20px 0"; // styles padding in 'results' div before each search.
+    
+    resultsDivStyle(); // see resultsDivStyle() function on line 10.
 
     var searchCity = document.getElementById("theBar").value; // this variable contains the search bar value entered.
 
@@ -33,32 +39,26 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
             searchCityCap[k] = searchCityCap[k].replace(searchCityCap[k][0], searchCityCap[k][0].toUpperCase());
           }
           searchCityCap = searchCityCap.join(" ");
-          // ----------------------------------------------------------
+          // -----------------------------------------------------------------------------------
 
           var photos = data.response.groups[0].items; // this variable represents each venue listing in the retrieved object. Knowing the total number of these venue listings through "photos.length" I am able to loop through each listing item in the 'for loop' below.
           
           var j = 1; // variable for the displayed number count to the left of venue name output
+
+          function resultData(){ // contains object data requests for venue name, category, phone number, and address info. Also inserts address into google maps link for a map location.
+            return "<strong>" + j++ +". </strong>" + data.response.groups[0].items[i].venue.name + " - " + data.response.groups[0].items[i].venue.categories[0].name + "<br>" + "<strong>Phone. </strong>" + data.response.groups[0].items[i].venue.contact.formattedPhone + "<br>" + "<strong>Address. </strong>" + data.response.groups[0].items[i].venue.location.formattedAddress + "<br>" + "<a href='http://www.google.com/maps/place/" + data.response.groups[0].items[i].venue.location.address + "+" + data.response.groups[0].items[i].venue.location.postalCode + "' target='_blank'>Google Map</a>" + "<br><br><br>";
+          }
+
           document.getElementById('results').innerHTML += "<h3>Search Results for " + searchCityCap + "</h3><br>";
           for (var i = 0; i < photos.length; i++) { // loops through each venue listing in object and extracts the venues preview photo as well as address & contact info.
 
             if (data.response.groups[0].items[i].venue.photos.count !== 0) { //Not all venues have photos. If there is not a photo the 'for loop' will error and stop. This conditional says if photos exist, do the below code, if no photos exist do the 'else' code.
 
               // the below code places specific venue listing info from the API object into the 'results' div and styles it.
-              document.getElementById('results').innerHTML += "<img src='" + data.response.groups[0].items[i].venue.photos.groups[0].items[0].prefix + "300x300" + data.response.groups[0].items[i].venue.photos.groups[0].items[0].suffix + "'>" + "<br><br>" +
-                "<strong>" + j++ +". </strong>" + data.response.groups[0].items[i].venue.name + " - " + data.response.groups[0].items[i].venue.categories[0].name + "<br>" +
-                "<strong>Phone. </strong>" + data.response.groups[0].items[i].venue.contact.formattedPhone + "<br>" +
-                "<strong>Address. </strong>" + data.response.groups[0].items[i].venue.location.formattedAddress + "<br>" +
-                "<a href='http://www.google.com/maps/place/" + data.response.groups[0].items[i].venue.location.address + "+" + data.response.groups[0].items[i].venue.location.postalCode + "' target='_blank'>Google Map</a>" +
-                "<br><br><br>";
+              document.getElementById('results').innerHTML += "<img src='" + data.response.groups[0].items[i].venue.photos.groups[0].items[0].prefix + "300x300" + data.response.groups[0].items[i].venue.photos.groups[0].items[0].suffix + "'>" + "<br><br>" + resultData();
             } else { // the below code extracts only the direction and address info if a photo does not exist.
-              document.getElementById('results').style.backgroundColor = "#fff";
-              document.getElementById('results').style.padding = "20px 0 20px 0";
-              document.getElementById('results').innerHTML += "<img src='http://res.cloudinary.com/djqeszs2b/image/upload/v1494782267/no_image_available_gduyp5.jpg' alt='' style='width:300px;height:px;'><br>" +
-                "<strong>" + j++ +". </strong>" + data.response.groups[0].items[i].venue.name + " - " + data.response.groups[0].items[i].venue.categories[0].name + "<br>" +
-                "<strong>Phone. </strong>" + data.response.groups[0].items[i].venue.contact.formattedPhone + "<br>" +
-                "<strong>Address. </strong>" + data.response.groups[0].items[i].venue.location.formattedAddress + "<br>" +
-                "<a href='http://www.google.com/maps/place/" + data.response.groups[0].items[i].venue.location.address + "+" + data.response.groups[0].items[i].venue.location.postalCode + "' target='_blank'>Google Map</a>" +
-                "<br><br><br>";
+              resultsDivStyle();
+              document.getElementById('results').innerHTML += "<img src='http://res.cloudinary.com/djqeszs2b/image/upload/v1494782267/no_image_available_gduyp5.jpg' alt='' style='width:300px;height:px;'><br><br>" + resultData();
             } // end of "if/else" conditional statement
 
           } // end of for loop
@@ -69,7 +69,7 @@ function getInfo() { // this 'getInfo' function is what grabs all the content fr
 
   } // end of getInfo function
 
-document.getElementById('theBtn').onclick = function(e) { // "click" search button fucntion, which runs "getInfo()" that pulls in data from object
+document.getElementById('theBtn').onclick = function(e) { // "click" search button function, which runs "getInfo()" that pulls in data from object
   e.preventDefault();
 
   getInfo();
